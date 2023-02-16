@@ -1,20 +1,24 @@
-import { Module } from '@nestjs/common';
-import { UsersModule } from './users/users.module';
+//src/app.module.ts
+import { Module } from "@nestjs/common";
+import { UsersModule } from "./users/users.module";
 import { SequelizeModule } from "@nestjs/sequelize";
+import { ConfigModule } from "@nestjs/config";
+import * as process from "process";
 
 
 @Module({
-  imports: [SequelizeModule.forRoot({
+  imports: [ConfigModule.forRoot({ envFilePath: `.${process.env.NODE_ENV}.env` }), SequelizeModule.forRoot({
     dialect: "mysql",
-    host: "localhost",
-    port: 3306,
-    username: "Konstantine899",
-    password: "4343",
-    database: "nest-course",
+    host: process.env.MYSQL_HOST,
+    port: Number(process.env.MYSQL_PORT),
+    username: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE,
     models: [],
     autoLoadModels: true
-  }),UsersModule],
+  }), UsersModule],
   controllers: [],
-  providers: [],
+  providers: []
 })
-export class AppModule {}
+export class AppModule {
+}
