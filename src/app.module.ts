@@ -5,6 +5,8 @@ import { SequelizeModule } from "@nestjs/sequelize";
 import { ConfigModule } from "@nestjs/config";
 import * as process from "process";
 import { UserModel } from "./users/users.model";
+import { RolesModule } from "./roles/roles.module";
+import { RolesModel } from "./roles/roles.model";
 
 @Module({
   imports: [
@@ -16,10 +18,11 @@ import { UserModel } from "./users/users.model";
       username: process.env.MYSQL_USER,
       password: process.env.MYSQL_PASSWORD,
       database: process.env.MYSQL_DATABASE,
-      models: [UserModel], // добавляю модели в БД
+      models: [UserModel, RolesModel], // добавляю модели в БД
       autoLoadModels: true,
     }),
     UsersModule,
+    RolesModule,
   ],
   controllers: [],
   providers: [],
