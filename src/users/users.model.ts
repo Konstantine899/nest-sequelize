@@ -1,6 +1,14 @@
 //src/users/users.model.ts
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import {
+  BelongsToMany,
+  Column,
+  DataType,
+  Model,
+  Table,
+} from "sequelize-typescript";
 import { ApiProperty } from "@nestjs/swagger";
+import { RolesModel } from "../roles/roles.model";
+import { UserRolesModel } from "../roles/user-roles.model";
 
 interface UserCreationAttrs {
   email: string;
@@ -43,4 +51,7 @@ export class UserModel extends Model<UserModel, UserCreationAttrs> {
   })
   @Column({ type: DataType.BOOLEAN, allowNull: true }) // По умолчанию поле причины блокировки может быть пустым
   banReason: string; // отображает причину блокировки
+
+  @BelongsToMany(() => RolesModel, () => UserRolesModel)
+  roles: RolesModel[];
 }

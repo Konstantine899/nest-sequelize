@@ -7,6 +7,7 @@ import * as process from "process";
 import { UserModel } from "./users/users.model";
 import { RolesModule } from "./roles/roles.module";
 import { RolesModel } from "./roles/roles.model";
+import { UserRolesModel } from "./roles/user-roles.model";
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { RolesModel } from "./roles/roles.model";
       username: process.env.MYSQL_USER,
       password: process.env.MYSQL_PASSWORD,
       database: process.env.MYSQL_DATABASE,
-      models: [UserModel, RolesModel], // добавляю модели в БД
+      models: [UserModel, RolesModel, UserRolesModel], // добавляю модели в БД
       autoLoadModels: true,
     }),
     UsersModule,
