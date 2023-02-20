@@ -49,7 +49,7 @@ export class UserModel extends Model<UserModel, UserCreationAttrs> {
     example: "За хулиганство",
     description: "Причина блокировки пользователя",
   })
-  @Column({ type: DataType.BOOLEAN, allowNull: true }) // По умолчанию поле причины блокировки может быть пустым
+  @Column({ type: DataType.STRING, allowNull: true }) // По умолчанию поле причины блокировки может быть пустым
   banReason: string; // отображает причину блокировки
 
   @BelongsToMany(() => RolesModel, () => UserRolesModel)
