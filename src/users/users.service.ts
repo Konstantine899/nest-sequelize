@@ -13,7 +13,7 @@ export class UsersService {
 
   async createUser(dto: CreateUserDto) {
     const user = await this.userRepository.create(dto);
-    const role = await this.roleService.getRoleByValue("USER"); // USER буду присваивать эту роль по умолчанию
+    const role = await this.roleService.getRoleByValue("ADMIN"); // USER буду присваивать эту роль по умолчанию
     await user.$set("roles", [role.id]); // указываю что роль принадлежит пользователю
     user.roles = [role]; // добавляю поле roles в объект user со значением роли пользователя
     return user;
