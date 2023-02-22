@@ -3,12 +3,14 @@ import {
   BelongsToMany,
   Column,
   DataType,
+  HasMany,
   Model,
   Table,
 } from "sequelize-typescript";
 import { ApiProperty } from "@nestjs/swagger";
 import { RolesModel } from "../roles/roles.model";
 import { UserRolesModel } from "../roles/user-roles.model";
+import { PostsModel } from "../posts/posts.model";
 
 interface UserCreationAttrs {
   email: string;
@@ -54,4 +56,8 @@ export class UserModel extends Model<UserModel, UserCreationAttrs> {
 
   @BelongsToMany(() => RolesModel, () => UserRolesModel)
   roles: RolesModel[];
+
+  // у одного пользователя может быть массив постов
+  @HasMany(() => PostsModel)
+  posts: PostsModel[];
 }

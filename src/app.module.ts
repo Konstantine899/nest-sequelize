@@ -8,7 +8,9 @@ import { UserModel } from "./users/users.model";
 import { RolesModule } from "./roles/roles.module";
 import { RolesModel } from "./roles/roles.model";
 import { UserRolesModel } from "./roles/user-roles.model";
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from "./auth/auth.module";
+import { PostsModule } from "./posts/posts.module";
+import { PostsModel } from "./posts/posts.model";
 
 @Module({
   imports: [
@@ -20,12 +22,13 @@ import { AuthModule } from './auth/auth.module';
       username: process.env.MYSQL_USER,
       password: process.env.MYSQL_PASSWORD,
       database: process.env.MYSQL_DATABASE,
-      models: [UserModel, RolesModel, UserRolesModel], // добавляю модели в БД
+      models: [UserModel, RolesModel, UserRolesModel, PostsModel], // добавляю модели в БД
       autoLoadModels: true,
     }),
     UsersModule,
     RolesModule,
     AuthModule,
+    PostsModule,
   ],
   controllers: [],
   providers: [],
