@@ -9,8 +9,15 @@ import {
 } from "sequelize-typescript";
 import { UserModel } from "../users/users.model";
 
+interface PostCreationAttr {
+  title: string;
+  context: string;
+  userId: number;
+  image: string; // название изображения
+}
+
 @Table({ tableName: "posts" })
-export class PostsModel extends Model<PostsModel> {
+export class PostsModel extends Model<PostsModel, PostCreationAttr> {
   @Column({
     type: DataType.INTEGER,
     unique: true,
